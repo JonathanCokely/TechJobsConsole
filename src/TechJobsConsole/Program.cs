@@ -119,26 +119,23 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
+            //Evaluate null
+            if (!someJobs.Any())
+            {
+                Console.WriteLine("No jobs found :(");
+            }
+
             //Return all list items when searching by JobData key
             foreach (Dictionary<string,string> item in someJobs)
             {
 
                 Console.WriteLine("*****");
 
-                //Evaluate null
-                if (!someJobs.Any())
-                {
-                    Console.WriteLine("No jobs found :(");
-                }
-
-                else
-                {
                     //Return all key value pairs
                     foreach (KeyValuePair<string, string> kvp in item)
                     {
                         Console.WriteLine(kvp.Key + ": " + kvp.Value);
                     }
-                }
             }
             
         }
