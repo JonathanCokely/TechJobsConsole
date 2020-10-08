@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TechJobsConsole
 {
@@ -29,7 +30,7 @@ namespace TechJobsConsole
             {
 
                 string actionChoice = GetUserSelection("View Jobs", actionChoices);
-
+                
                 if (actionChoice.Equals("list"))
                 {
                     string columnChoice = GetUserSelection("List", columnChoices);
@@ -118,7 +119,28 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("PrintJobs is not implemented yet");
+            //Return all list items when searching by JobData key
+            foreach (Dictionary<string,string> item in someJobs)
+            {
+
+                Console.WriteLine("*****");
+
+                //Evaluate null
+                if (!someJobs.Any())
+                {
+                    Console.WriteLine("No jobs found :(");
+                }
+
+                else
+                {
+                    //Return all key value pairs
+                    foreach (KeyValuePair<string, string> kvp in item)
+                    {
+                        Console.WriteLine(kvp.Key + ": " + kvp.Value);
+                    }
+                }
+            }
+            
         }
     }
 }
