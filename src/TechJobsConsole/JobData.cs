@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 
@@ -137,6 +139,25 @@ namespace TechJobsConsole
             valueBuilder.Clear();
 
             return rowValues.ToArray();
+        }
+
+        /*Returns a key-value pair through a value search term*/
+        public static List<string> FindByValue(string value)
+        {
+            LoadData();
+
+            List<string> values = new List<string>();
+
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                string aValue = job[value];
+
+                if (!values.Contains(aValue))
+                {
+                    values.Add(aValue);
+                }
+            }
+            return values;
         }
     }
 }
