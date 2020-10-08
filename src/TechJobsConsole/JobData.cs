@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace TechJobsConsole
@@ -141,23 +142,48 @@ namespace TechJobsConsole
             return rowValues.ToArray();
         }
 
-        /*Returns a key-value pair through a value search term*/
-        public static List<string> FindByValue(string value)
+        /*Searches a string within all columns. Returns a key-value pair through a value search term, regardless of column*/
+        public static List<Dictionary<string,string>> FindByValue(string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> rowItem in row)
+                { string aValue = rowItem.Value;
+
+                    if (aValue.Contains(value))
+                    {
+                        jobs.Add(row);
+                    }
+                }
+            }
+
+            return jobs;
+        }
+        /*
         {
             LoadData();
 
-            List<string> values = new List<string>();
+            Dictionary<string,string> values = new Dictionary<string,string>();
 
             foreach (Dictionary<string, string> job in AllJobs)
             {
-                string aValue = job[value];
-
-                if (!values.Contains(aValue))
+                foreach (KeyValuePair<string, string> kvp in job)
                 {
-                    values.Add(aValue);
+                    string testValue = kvp.Value;
+                    string testKey = kvp.Key;
+                    if (testValue == value && !values.ContainsValue(testValue))
+                    {
+                        values.Add(testValue,testKey);
+                    }
+
                 }
             }
             return values;
-        }
+        } */
     }
 }
