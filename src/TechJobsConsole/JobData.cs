@@ -52,7 +52,7 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (aValue.ToUpper().Contains(value.ToUpper()))
                 {
                     jobs.Add(row);
                 }
@@ -155,7 +155,7 @@ namespace TechJobsConsole
                 foreach (KeyValuePair<string, string> rowItem in row)
                 { string aValue = rowItem.Value;
 
-                    if (aValue.Contains(value))
+                    if (aValue.ToUpper().Contains(value.ToUpper()))
                     {
                         jobs.Add(row);
                     }
@@ -164,26 +164,5 @@ namespace TechJobsConsole
 
             return jobs;
         }
-        /*
-        {
-            LoadData();
-
-            Dictionary<string,string> values = new Dictionary<string,string>();
-
-            foreach (Dictionary<string, string> job in AllJobs)
-            {
-                foreach (KeyValuePair<string, string> kvp in job)
-                {
-                    string testValue = kvp.Value;
-                    string testKey = kvp.Key;
-                    if (testValue == value && !values.ContainsValue(testValue))
-                    {
-                        values.Add(testValue,testKey);
-                    }
-
-                }
-            }
-            return values;
-        } */
     }
 }
